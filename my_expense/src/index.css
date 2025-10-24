@@ -1,0 +1,12 @@
+:root {
+	font-family: InterVar, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+	font-optical-sizing: auto;
+	line-height: 1.5;
+	font-weight: 400;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
