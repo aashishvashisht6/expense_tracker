@@ -53,6 +53,12 @@ def get_columns():
 			"fieldtype": "Currency",
 			"width": 120,
 		},
+		{
+			"fieldname": "remarks",
+			"label": "Remarks",
+			"fieldtype": "Small Text",
+			"width": 120,
+		},
 	]
 	return columns
 
@@ -65,6 +71,7 @@ def get_data(filters):
 			"bank_account",
 			"transaction_date",
 			"transaction_type",
+			"remarks",
 			Case().when(bank_txn.transaction_type == "Expense", bank_txn.amount).else_(0).as_("debit"),
 			Case().when(bank_txn.transaction_type == "Income", bank_txn.amount).else_(0).as_("credit"),
 		)

@@ -8,6 +8,7 @@
   "transaction_date",
   "transaction_type",
   "amount",
+  "remarks",
   "cancelled"
  ],
  "fields": [
@@ -49,12 +50,18 @@
    "fieldname": "cancelled",
    "fieldtype": "Check",
    "label": "Cancelled"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-13 19:26:40.061039",
+ "modified": "2025-11-13 21:40:53.520367",
  "modified_by": "Administrator",
  "module": "Expense Tracker",
  "name": "ET Bank Transaction",
