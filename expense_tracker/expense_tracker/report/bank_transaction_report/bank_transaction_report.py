@@ -4,6 +4,7 @@
 import frappe
 from frappe import _
 from frappe.query_builder import Case, Order
+from frappe.query_builder import functions as fn
 from frappe.utils import getdate
 
 
@@ -81,12 +82,44 @@ def get_data(filters):
 
 	query = get_conditions(filters, query, bank_txn)
 	data = query.run(as_dict=True)
+	opening_bal = calculate_opening_balance(filters)
 
-	return calculate_balance(data)
+	return calculate_balance(data, opening_bal)
 
 
-def calculate_balance(data):
-	balance = 0.0
+def calculate_opening_balance(filters):
+	if filters.get("bank_account") and filters.get("from_date"):
+		bank_txn = frappe.qb.DocType("ET Bank Transaction")
+
+		opening_query = (
+			frappe.qb.from_(bank_txn)
+			.select(
+				(fn.Sum(Case().when(bank_txn.transaction_type == "Income", bank_txn.amount).else_(0))).as_(
+					"total_credit"
+				),
+				(fn.Sum(Case().when(bank_txn.transaction_type == "Expense", bank_txn.amount).else_(0))).as_(
+					"total_debit"
+				),
+			)
+			.where(
+				(bank_txn.bank_account == filters.get("bank_account"))
+				& (bank_txn.transaction_date < filters.get("from_date"))
+				& (bank_txn.cancelled == 0)
+			)
+		)
+
+		result = opening_query.run(as_dict=True)
+		row = result[0] if result else {}
+		total_credit = row.get("total_credit") or 0
+		total_debit = row.get("total_debit") or 0
+
+		opening_balance = total_credit - total_debit
+		return opening_balance
+	return 0
+
+
+def calculate_balance(data, opening_bal):
+	balance = opening_bal
 	total_debit = 0.0
 	total_credit = 0.0
 	for row in data:
@@ -97,6 +130,9 @@ def calculate_balance(data):
 
 	data.append(
 		{"transaction_type": "<b>Total</b>", "credit": total_credit, "debit": total_debit, "balance": balance}
+	)
+	data.insert(
+		0, {"transaction_type": "<b>Opening</b>", "credit": 0.0, "debit": 0.0, "balance": opening_bal}
 	)
 	return data
 
