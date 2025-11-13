@@ -5,7 +5,8 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "account_name"
+  "account_name",
+  "user"
  ],
  "fields": [
   {
@@ -13,13 +14,21 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Account Name",
+   "reqd": 1,
    "unique": 1
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-10 23:08:15.316998",
+ "modified": "2025-11-13 19:04:56.504450",
  "modified_by": "Administrator",
  "module": "Expense Tracker",
  "name": "ET Bank Account",

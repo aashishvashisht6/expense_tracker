@@ -5,8 +5,10 @@
  "engine": "InnoDB",
  "field_order": [
   "bank_account",
+  "transaction_date",
   "transaction_type",
-  "amount"
+  "amount",
+  "cancelled"
  ],
  "fields": [
   {
@@ -35,12 +37,24 @@
    "label": "Amount",
    "non_negative": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "label": "Transaction Date",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "cancelled",
+   "fieldtype": "Check",
+   "label": "Cancelled"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-11 00:06:07.739123",
+ "modified": "2025-11-13 19:08:02.520771",
  "modified_by": "Administrator",
  "module": "Expense Tracker",
  "name": "ET Bank Transaction",
