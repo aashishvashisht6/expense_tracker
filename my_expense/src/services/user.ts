@@ -1,11 +1,17 @@
 import axios from "axios";
 
 export const login = async (email: string, pwd: string) => {
-  const result = await axios.post("/api/method/login", { usr: email, pwd });
-  if (result.data?.message) {
-    return result?.data?.message;
+  try {
+    const result = await axios.post("/api/method/login", { usr: email, pwd });
+    if (result.data?.message) {
+      return result?.data?.message;
+    }
+    return result?.data;
+  } catch (error: any) {
+    console.error("Login error:", error);
+    return error?.response?.data?.message || "An error occurred during login" ;
   }
-  console.error(result?.data);
+  
 };
 
 export const getProfile = async () => {
@@ -15,7 +21,7 @@ export const getProfile = async () => {
       return result?.data;
     }
     return result?.data;
-  } catch (error:any) {
-    return {error: error?.response?.data?.exception};
+  } catch (error: any) {
+    return { error: error?.response?.data?.exception };
   }
 };

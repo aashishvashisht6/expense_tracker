@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import { getProfile } from "../services/user";
 
+type AuthState = {
+  loading: boolean;
+  authenticated: boolean;
+  user: string | null;
+};
+
 const useAuth = () => {
-  const [auth, setAuth] = useState({
+  const [auth, setAuth] = useState<AuthState>({
     loading: true,
     authenticated: false,
     user: null,

@@ -13,7 +13,6 @@
   "dependencies": {
     "axios": "^1.12.2",
     "bootstrap": "^5.3.8",
-    "frappe-datatable": "^1.19.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.4",

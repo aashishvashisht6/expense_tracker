@@ -1,28 +1,28 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import "./App.css";
-import Login from "./pages/login";
+import PrivateRoute from "./components/common/PrivateRoute";
+import Login from "./pages/Login";
 import Layout from "./pages/Layout";
-import PrivateRoute from "./components/PrivateRoute";
 import ListView from "./pages/ListView";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
-    <>
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/login" element={<Login />} />
+    <Routes>
+      {/* Public Routes */}
+      <Route path="/login" element={<Login />} />
 
-        {/* Private Routes */}
-        <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Navigate to="/dashboard" replace />} />
-            <Route path="dashboard" element={<Layout />} />
-            <Route path="bank-accounts" element={<ListView />} />
-            <Route path="transaction" element={<Layout />} />
-          </Route>
+      {/* Private Routes */}
+      <Route element={<PrivateRoute />}>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="bank-account" element={<ListView doctype="bank_account"/>} />
+          <Route path="expenses" element={<ListView doctype="expenses"/>} />
+          <Route path="income" element={<ListView doctype="income"/>} />
+          <Route path="reports" element={<Dashboard/>} />
         </Route>
-      </Routes>
-    </>
+      </Route>
+    </Routes>
   );
 }
 
