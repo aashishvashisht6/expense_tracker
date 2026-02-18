@@ -1,0 +1,5 @@
+@media (min-width: 768px) {
+  .content-area {
+    margin-left: 240px; /* same width as sidebar */
+  }
+}
