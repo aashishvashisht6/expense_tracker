@@ -1,5 +1,14 @@
+@media (max-width: 767px) {
+  .content-area {
+    max-width: 100%;
+    overflow: hidden
+  }
+}
+
 @media (min-width: 768px) {
   .content-area {
     margin-left: 240px; /* same width as sidebar */
   }
 }
+
+

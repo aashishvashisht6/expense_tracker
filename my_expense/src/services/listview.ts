@@ -8,7 +8,7 @@ export const fetchListData = async (url: string, params?: {}) => {
     }
     return result?.data;
   } catch (error: any) {
-    console.error("Login error:", error);
+    console.error("List View error:", error);
     return error?.response?.data?.message || "An error occurred while fetching data" ;
   }
   

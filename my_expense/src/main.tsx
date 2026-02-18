@@ -7,8 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter basename="/my_expense">
-      <App />
+    <BrowserRouter>
+      <App/>
     </BrowserRouter>
   </StrictMode>
 );

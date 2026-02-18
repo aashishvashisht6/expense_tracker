@@ -10,7 +10,7 @@ const Navbar = () => {
       <div className="container-fluid">
         {/* Used for Mobile SideBar */}
         <button
-          className="btn btn-outline-secondary me-2 d-lg-none"
+          className="btn btn-outline-secondary me-2 d-md-none"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#mobileSidebar"

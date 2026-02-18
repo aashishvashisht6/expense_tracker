@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 const sidebarItems = [
@@ -10,30 +9,28 @@ const sidebarItems = [
   { name: "Reports", path: "/reports" },
 ]
 const Sidebar = () => {
-  const [activePath, setActivePath] = useState<string>("/dashboard");
   return (
     <>
       {/* Desktop sidebar */}
-      <div className="d-none d-lg-block bg-dark border-end vh-100 position-fixed p-3" style={{ width: "15rem" }}>
+      <div className="d-none d-md-block bg-dark border-end vh-100 position-fixed p-3" style={{ width: "15rem" }}>
         <ul className="nav flex-column">
           {sidebarItems.map((item) => (
             <li className="nav-item" key={item.path}>
-              <Link className={`nav-link text-white ${item.path === activePath ? "bg-primary" : ""}`} 
-              to={item.path}
-              onClick={() => setActivePath(item.path)}>
+              <NavLink
+                to={item.path}
+                className={({ isActive }) =>
+                  `nav-link text-white ${isActive ? "bg-primary" : ""}`
+                }
+              >
                 {item.name}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>
       </div>
 
       {/* Mobile drawer */}
-      <div
-        className="offcanvas offcanvas-start"
-        tabIndex={-1}
-        id="mobileSidebar"
-      >
+      <div className="offcanvas offcanvas-start" tabIndex={-1} id="mobileSidebar">
         <div className="offcanvas-header">
           <h5>Menu</h5>
           <button className="btn-close" data-bs-dismiss="offcanvas"></button>
@@ -41,15 +38,19 @@ const Sidebar = () => {
 
         <div className="offcanvas-body">
           <ul className="nav flex-column">
-            <li className="nav-item">
-              <a className="nav-link" href="#">Dashboard</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Expenses</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Reports</a>
-            </li>
+            {sidebarItems.map((item) => (
+              <li className="nav-item" key={item.path}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? "active fw-bold text-primary" : ""}`
+                  }
+                  data-bs-dismiss="offcanvas"
+                >
+                  {item.name}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
