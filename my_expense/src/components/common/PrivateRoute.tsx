@@ -1,18 +1,49 @@
-import { Navigate, Outlet } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import { Outlet, useNavigate } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
+import { getProfile } from "../../services/user";
+
+type AuthContextProps = {
+  email: string;
+  full_name: string;
+}
+
+export const AuthContext = createContext<AuthContextProps>({email: "", full_name:""});
+
 
 const PrivateRoute = () => {
-  const { loading, authenticated } = useAuth();
 
-  if (loading)
-    return (
-      <div className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
-        <div className="spinner-border text-primary" role="status">
-        </div>
-      </div>
-    );
+  const [user, setUser] = useState<AuthContextProps>({email: "", full_name:""});
+  const [loading, setLoading] = useState<Boolean>(true);
 
-  return authenticated ? <Outlet /> : <Navigate to="/login" />;
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    checkLogin();
+  }, []);
+
+  const checkLogin = async () => {
+    getProfile().then((data) => {
+      if (!data.message) {
+        redirectToLogin();
+        return;
+      }
+      const cookies = Object.fromEntries(
+        document.cookie.split("; ").map((c) => c.split("=")),
+      );
+      setUser({ email: data, full_name: cookies?.full_name });
+    });
+    setLoading(false);
+  };
+
+  const redirectToLogin = () => {
+    navigate("/login");
+  };
+
+  return (
+    <AuthContext.Provider value={user}>
+      {!loading && <Outlet/>}
+    </AuthContext.Provider>
+  );
 };
 
 export default PrivateRoute;

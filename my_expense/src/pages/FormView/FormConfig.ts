@@ -4,8 +4,8 @@ export const formConfig: any = {
     endpoint: "/api/resource/ET%20Bank%20Account",
     fields: [
       { key: "name", label: "ID", type: "text", hidden: true },
-      { key: "account_name", label: "Account Name", type: "text" },
-      { key: "user", label: "User", type: "text", readonly: true },
+      { key: "account_name", label: "Account Name", type: "text", reqd:true },
+      { key: "user", label: "User", type: "text", readonly: true, reqd:true },
     ],
   },
   expenses: {
@@ -13,18 +13,18 @@ export const formConfig: any = {
     endpoint: "/api/resource/ET%20Bank%20Transaction",
     fields: [
       { key: "name", label: "ID", type: "text", hidden: true },
-      { key: "bank_account", label: "Bank Account", type: "text" },
-      { key: "transaction_date", label: "Transaction Date", type: "date" },
+      { key: "bank_account", label: "Bank Account", type: "link", reqd:true, options: "ET Bank Account" },
+      { key: "transaction_date", label: "Transaction Date", type: "date", reqd:true  },
       {
         key: "transaction_type",
         label: "Transaction Type",
         type: "select",
         options: ["Expense"],
-        readonly: true,
+        reqd:true 
       },
-      { key: "amount", label: "Amount", type: "number" },
-      { key: "remarks", label: "Remarks", type: "text" },
-      { key: "cancelled", label: "Cancelled", type: "number" },
+      { key: "amount", label: "Amount", type: "number", reqd:true  },
+      { key: "remarks", label: "Remarks", type: "text", reqd:true  },
+      { key: "cancelled", label: "Cancelled", type: "checkbox" },
     ],
   },
   income: {
@@ -32,18 +32,18 @@ export const formConfig: any = {
     endpoint: "/api/resource/ET%20Bank%20Transaction",
     fields: [
       { key: "name", label: "ID", type: "text", hidden: true },
-      { key: "bank_account", label: "Bank Account", type: "text" },
-      { key: "transaction_date", label: "Transaction Date", type: "date" },
+      { key: "bank_account", label: "Bank Account", type: "link", reqd:true, options: "ET Bank Account"  },
+      { key: "transaction_date", label: "Transaction Date", type: "date", reqd:true  },
       {
         key: "transaction_type",
         label: "Transaction Type",
         type: "select",
         options: ["Income"],
-        readonly: true,
+        reqd:true 
       },
-      { key: "amount", label: "Amount", type: "number" },
-      { key: "remarks", label: "Remarks", type: "text" },
-      { key: "cancelled", label: "Cancelled", type: "number" },
+      { key: "amount", label: "Amount", type: "number", reqd:true  },
+      { key: "remarks", label: "Remarks", type: "text", reqd:true  },
+      { key: "cancelled", label: "Cancelled", type: "checkbox" },
     ],
   },
 };

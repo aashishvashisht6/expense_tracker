@@ -25,3 +25,16 @@ export const getProfile = async () => {
     return { error: error?.response?.data?.exception };
   }
 };
+
+export const logout = async () => {
+  try {
+    const result = await axios.post("/api/method/logout");
+    if (result.data?.message) {
+      return result?.data?.message;
+    }
+    return result?.data;
+  } catch (error: any) {
+    console.error("Login error:", error);
+    return error?.response?.data?.message || "An error occurred during login" ;
+  }
+}

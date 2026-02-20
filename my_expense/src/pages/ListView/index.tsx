@@ -60,12 +60,11 @@ const ListView = ({
                 {listConfig[doctype].columns.map((col) => (
                     <>
                     {col.type === "Link"? (
-                        <td key={col.key} className="text-decoration-underline" style={{cursor: "pointer"}} onClick={() => navigateToDetail(row[col.key])}>{row[col.key]}</td>
+                        <td key={`${col.key}-${row[col.key]}`} className="text-decoration-underline" style={{cursor: "pointer"}} onClick={() => navigateToDetail(row[col.key])}>{row[col.key]}</td>
                     ) : (
-                        <td key={col.key}>{row[col.key]}</td>
+                        <td key={`${col.key}-${row[col.key]}`}>{row[col.key]}</td>
                     )}
                     </>
-                //   <td key={col.key}>{row[col.key]}</td>
                 ))}
               </tr>
             )) : (
