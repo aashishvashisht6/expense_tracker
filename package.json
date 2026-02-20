@@ -1,0 +1,16 @@
+{
+  "name": "expense_tracker",
+  "version": "1.0.0",
+  "description": "ET Expense tracker",
+  "scripts": {
+    "postinstall": "cd my_expense && yarn install",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cd my_expense && yarn dev",
+    "build": "cd my_expense && yarn build"
+  },
+  "keywords": [],
+  "author": "Aashish",
+  "license": "ISC",
+  "dependencies": {
+  }
+}
