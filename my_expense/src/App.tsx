@@ -5,6 +5,7 @@ import Layout from "./pages/Layout";
 import ListView from "./pages/ListView";
 import Dashboard from "./pages/Dashboard";
 import FormView from "./pages/FormView";
+import Report from "./pages/Report";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="expenses" element={<ListView doctype="expenses"/>} />
           <Route path="income" element={<ListView doctype="income"/>} />
           <Route path=":doctype/:name" element={<FormView />} />
-          <Route path="reports" element={<Dashboard/>} />
+          <Route path="reports" element={<Report/>} />
         </Route>
       </Route>
     </Routes>

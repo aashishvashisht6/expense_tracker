@@ -6,7 +6,7 @@ export interface FormField {
   type: FieldType;
   readonly?: boolean;
   hidden?: boolean;
-  options: string[];
+  options?: string[] | string;
   reqd?: boolean;
 }
 
@@ -45,7 +45,7 @@ const SelectField: React.FC<FieldProps> = ({ field, value, onChange }) => {
         required={field.reqd}
       >
         <option selected={value ? false : true}></option>
-        {field.options.length > 0 &&
+        {Array.isArray(field.options) && field.options.length > 0 &&
           field.options.map((row: string) => (
             <option
               value={row}
