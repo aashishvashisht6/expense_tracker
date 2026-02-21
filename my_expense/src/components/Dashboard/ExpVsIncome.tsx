@@ -32,8 +32,6 @@ const FinancePieChart: React.FC = () => {
 
   useEffect(() => {
     fetchExpenseIncomeChart().then((resp) => {
-      console.log("Chart API Response:", resp);
-
       if (resp?.labels && resp?.datasets) {
         createPieChart(resp);
       } else {

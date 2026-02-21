@@ -34,7 +34,6 @@ const ExpenseLineChart: React.FC = () => {
 
   useEffect(() => {
     fetchExpenseDateWise().then((resp) => {
-      console.log(resp)
       if (resp?.labels) {
         createLineChart(resp);
       }

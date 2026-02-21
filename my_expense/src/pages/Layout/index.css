@@ -1,3 +1,7 @@
+.content-area{
+  overflow: hidden;
+}
+
 @media (max-width: 767px) {
   .content-area {
     max-width: 100%;

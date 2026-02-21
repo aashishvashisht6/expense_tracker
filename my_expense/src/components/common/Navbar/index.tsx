@@ -1,8 +1,11 @@
 import Logo from "../../../assets/expense.svg";
 import UserSection from "./UserSection";
 
-const Navbar = () => {
+type NavProps = {
+  setShowMobileSideBar: (value: boolean) => void
+}
 
+const Navbar = ({setShowMobileSideBar}: NavProps) => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
       <div className="container-fluid">
@@ -12,6 +15,7 @@ const Navbar = () => {
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#mobileSidebar"
+          onClick={() => setShowMobileSideBar(true)}
         >
           ☰
         </button>
