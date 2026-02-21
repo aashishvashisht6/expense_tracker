@@ -8,6 +8,16 @@ from frappe.query_builder.functions import Sum
 
 
 class ETBankAccount(Document):
+	def validate(self):
+		if not self.user:
+			self.user = frappe.session.user
+	
+	def on_update(self):
+		# First Check if permission exist if not Update Role Permissions for the user
+		perms = frappe.permissions.get_user_permissions(self.user)
+		if not perms.get(self.doctype) or self.name not in perms.get(self.doctype):
+			frappe.permissions.add_user_permission(self.doctype, self.name, self.user)
+
 	@frappe.whitelist()
 	def get_bank_balance(self):
 		"""Return dynamic balance for given bank account."""

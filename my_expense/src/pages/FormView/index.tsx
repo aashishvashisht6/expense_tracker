@@ -33,6 +33,7 @@ const FormView = () => {
         if (name === "new") {
           navigate(`/${doctype}/${resp.data.name}`);
         }
+        setError("");
         setFormData(resp.data);
       }
       setSaving(false);

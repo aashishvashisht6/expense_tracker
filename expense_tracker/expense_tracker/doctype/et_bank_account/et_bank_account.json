@@ -21,14 +21,13 @@
    "fieldname": "user",
    "fieldtype": "Link",
    "label": "User",
-   "options": "User",
-   "reqd": 1
+   "options": "User"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-13 19:04:56.504450",
+ "modified": "2026-02-21 22:01:33.135159",
  "modified_by": "Administrator",
  "module": "Expense Tracker",
  "name": "ET Bank Account",
