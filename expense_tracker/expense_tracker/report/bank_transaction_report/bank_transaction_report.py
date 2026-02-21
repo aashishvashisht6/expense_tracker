@@ -5,7 +5,7 @@ import frappe
 from frappe import _
 from frappe.query_builder import Case, Order
 from frappe.query_builder import functions as fn
-from frappe.utils import getdate
+from frappe.utils import getdate, flt
 
 
 def execute(filters=None):
@@ -113,7 +113,7 @@ def calculate_opening_balance(filters):
 		total_credit = row.get("total_credit") or 0
 		total_debit = row.get("total_debit") or 0
 
-		opening_balance = total_credit - total_debit
+		opening_balance = flt((total_credit - total_debit), 2)
 		return opening_balance
 	return 0
 
@@ -123,9 +123,9 @@ def calculate_balance(data, opening_bal):
 	total_debit = 0.0
 	total_credit = 0.0
 	for row in data:
-		total_credit += row.credit
-		total_debit += row.debit
-		row.balance = balance + row.credit - row.debit
+		total_credit += flt(row.credit, 2)
+		total_debit += flt(row.debit, 2)
+		row.balance = flt(balance + row.credit - row.debit, 2)
 		balance = row.balance
 
 	data.append(
