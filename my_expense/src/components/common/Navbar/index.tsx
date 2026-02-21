@@ -4,7 +4,7 @@ import UserSection from "./UserSection";
 const Navbar = () => {
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top">
       <div className="container-fluid">
         {/* Used for Mobile SideBar */}
         <button

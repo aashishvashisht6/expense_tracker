@@ -1,13 +1,28 @@
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>my_expense</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>my_expense</title>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script>
+			window.csrf_token = "{{ csrf_token }}";
+		</script>
+		<!-- <script>
+			fetch("/api/method/expense_tracker.www.my_expense.get_context_for_dev", {
+				credentials: "include",
+			})
+				.then((resp) => resp.json())
+				.then((data) => {
+					if (data.message) {
+						window.csrf_token = data.message.csrf_token;
+					}
+				})
+				.catch((err) => console.error("Error:", err));
+		</script> -->
+		<script type="module" src="/src/main.tsx"></script>
+	</body>
 </html>
