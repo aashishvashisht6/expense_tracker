@@ -154,7 +154,7 @@ const LinkDropdown: React.FC<FieldProps> = ({ field, value, onChange }) => {
         <div
           className="border bg-dark"
           style={{
-            position: "absolute",
+            position: "relative",
             width: "100%",
             zIndex: 1000,
             maxHeight: "200px",
