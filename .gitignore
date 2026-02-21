@@ -6,4 +6,3 @@ tags
 node_modules
 __pycache__
 expense_tracker/public/my_expense
-expense_tracker/www/my_expense.*

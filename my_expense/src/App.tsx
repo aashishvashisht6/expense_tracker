@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import PrivateRoute from "./components/common/PrivateRoute";
-import Login from "./pages/Login";
+import Login from "./pages/LoginPage";
 import Layout from "./pages/Layout";
 import ListView from "./pages/ListView";
 import Dashboard from "./pages/Dashboard";
