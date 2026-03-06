@@ -41,7 +41,20 @@ const FormView = () => {
   };
 
   const getFormData = () => {
-    if (!doctype || !name || name === "new") return;
+    if (!doctype || !name || name === "new") {
+      const defaults: any = {};
+
+      if (doctype) {
+        formConfig[doctype].fields.forEach((field: FormField) => {
+          if (field.default !== undefined) {
+            defaults[field.key] = field.default;
+          }
+        });
+      }
+
+      setFormData(defaults);
+      return;
+    }
     const url = `${formConfig[doctype].endpoint}/${name}`;
     fetchFormData(url).then((resp) => {
       setFormData(resp.data);

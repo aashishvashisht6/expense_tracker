@@ -20,7 +20,8 @@ export const formConfig: any = {
         label: "Transaction Type",
         type: "select",
         options: ["Expense"],
-        reqd:true 
+        reqd:true,
+        default: "Expense",
       },
       { key: "amount", label: "Amount", type: "number", reqd:true  },
       { key: "remarks", label: "Remarks", type: "text", reqd:true  },
@@ -39,7 +40,8 @@ export const formConfig: any = {
         label: "Transaction Type",
         type: "select",
         options: ["Income"],
-        reqd:true 
+        reqd:true,
+        default: "Income",
       },
       { key: "amount", label: "Amount", type: "number", reqd:true  },
       { key: "remarks", label: "Remarks", type: "text", reqd:true  },
@@ -59,7 +61,8 @@ export const formConfig: any = {
         label: "Transaction Type",
         type: "select",
         options: ["Bank Transfer"],
-        reqd:true 
+        reqd:true,
+        default: "Bank Transfer",
       },
       { key: "amount", label: "Amount", type: "number", reqd:true  },
       { key: "remarks", label: "Remarks", type: "text", reqd:true  },

@@ -8,6 +8,7 @@ export interface FormField {
   hidden?: boolean;
   options?: string[] | string;
   reqd?: boolean;
+  default?: string | number | boolean;
 }
 
 type FieldType = "text" | "number" | "checkbox" | "date" | "select" | "link";
@@ -40,18 +41,15 @@ const SelectField: React.FC<FieldProps> = ({ field, value, onChange }) => {
       <label className="form-label">{field.label}</label>
       <select
         className="form-control"
-        disabled={field.readonly ? true : false}
+        disabled={field.readonly}
+        value={value || ""}
         onChange={(e) => onChange(field.key, e.target.value)}
         required={field.reqd}
       >
-        <option selected={value ? false : true}></option>
-        {Array.isArray(field.options) && field.options.length > 0 &&
+
+        {Array.isArray(field.options) &&
           field.options.map((row: string) => (
-            <option
-              value={row}
-              key={row}
-              selected={row === value ? true : false}
-            >
+            <option value={row} key={row}>
               {row}
             </option>
           ))}
