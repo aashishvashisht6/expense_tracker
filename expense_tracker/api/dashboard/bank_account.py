@@ -28,6 +28,7 @@ def expense_income_data():
         .where(txn.cancelled == 0)
         .where(txn.transaction_date >= first_day_month)
         .where(txn.transaction_date <= last_day_month)
+        .where(txn.transaction_type.isin(["Expense", "Income"]))
         .select(
             Sum(txn.amount).as_("balance"), txn.transaction_type
         ).groupby(txn.transaction_type)

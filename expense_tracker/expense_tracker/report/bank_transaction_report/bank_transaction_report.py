@@ -73,8 +73,22 @@ def get_data(filters):
 			"transaction_date",
 			"transaction_type",
 			"remarks",
-			Case().when(bank_txn.transaction_type == "Expense", bank_txn.amount).else_(0).as_("debit"),
-			Case().when(bank_txn.transaction_type == "Income", bank_txn.amount).else_(0).as_("credit"),
+			Case()
+				.when(bank_txn.transaction_type == "Expense", bank_txn.amount)
+				.when(
+					(bank_txn.transaction_type == "Bank Transfer")
+					& (bank_txn.bank_account == filters.get("bank_account")),
+					bank_txn.amount,
+				)
+				.else_(0).as_("debit"),
+			Case()
+				.when(bank_txn.transaction_type == "Income", bank_txn.amount)
+				.when(
+					(bank_txn.transaction_type == "Bank Transfer")
+					& (bank_txn.to_bank_account == filters.get("bank_account")),
+					bank_txn.amount,
+				)
+				.else_(0).as_("credit"),
 		)
 		.where(bank_txn.cancelled == 0)
 		.orderby("transaction_date", order=Order.asc)
@@ -94,10 +108,26 @@ def calculate_opening_balance(filters):
 		opening_query = (
 			frappe.qb.from_(bank_txn)
 			.select(
-				(fn.Sum(Case().when(bank_txn.transaction_type == "Income", bank_txn.amount).else_(0))).as_(
-					"total_credit"
-				),
-				(fn.Sum(Case().when(bank_txn.transaction_type == "Expense", bank_txn.amount).else_(0))).as_(
+				(fn.Sum(
+					Case()
+						.when(bank_txn.transaction_type == "Income", bank_txn.amount)
+						.when(
+							(bank_txn.transaction_type == "Bank Transfer")
+							& (bank_txn.to_bank_account == filters.get("bank_account")),
+							bank_txn.amount,
+						)
+						.else_(0))).as_(
+						"total_credit"
+					),
+				(fn.Sum(
+					Case()
+						.when(bank_txn.transaction_type == "Expense", bank_txn.amount)
+						.when(
+							(bank_txn.transaction_type == "Bank Transfer")
+							& (bank_txn.bank_account == filters.get("bank_account")),
+							bank_txn.amount,
+						)
+						.else_(0))).as_(
 					"total_debit"
 				),
 			)
@@ -142,7 +172,10 @@ def get_conditions(filters, query, bank_txn):
 		frappe.throw(_("From Date cannot be greater than To Date"))
 
 	if filters.get("bank_account"):
-		query = query.where(bank_txn.bank_account == filters.get("bank_account"))
+		query = query.where(
+					(bank_txn.bank_account == filters.get("bank_account"))
+					| (bank_txn.to_bank_account == filters.get("bank_account"))
+				)
 	if filters.get("from_date"):
 		query = query.where(bank_txn.transaction_date >= filters.get("from_date"))
 	if filters.get("to_date"):

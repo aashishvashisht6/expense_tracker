@@ -24,14 +24,28 @@ class ETBankAccount(Document):
 		txn = frappe.qb.DocType("ET Bank Transaction")
 		query = (
 			frappe.qb.from_(txn)
-			.where(txn.bank_account == self.name)
+			.where(
+				(txn.bank_account == self.name) |
+				(txn.to_bank_account == self.name)
+			)
 			.where(txn.cancelled == 0)
 			.select(
 				Sum(
-					Case().when(txn.transaction_type == "Expense", -txn.amount)
-					.when(txn.transaction_type == "Income", txn.amount).else_(0)
+					Case()
+					.when(txn.transaction_type == "Expense", -txn.amount)
+					.when(txn.transaction_type == "Income", txn.amount)
+					.when(
+						(txn.transaction_type == "Bank Transfer") & (txn.bank_account == self.name),
+						-txn.amount
+					)
+					.when(
+						(txn.transaction_type == "Bank Transfer") & (txn.to_bank_account == self.name),
+						txn.amount
+					)
+					.else_(0)
 				).as_("balance")
-			))
-		result = query.run(as_dict=1)
+			)
+		)
 
+		result = query.run(as_dict=1)
 		return result[0].get("balance") if result else 0
