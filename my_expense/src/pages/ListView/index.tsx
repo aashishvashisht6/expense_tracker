@@ -32,6 +32,8 @@ const ListView = ({
     });
   };
 
+  const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB").format(new Date(date)).replace(/\//g, "-");
+
   useEffect(() => {
     // Fetch data from API based on doctype
     setData([]); // Clear previous data when doctype changes
@@ -73,6 +75,10 @@ const ListView = ({
                           onClick={() => navigateToDetail(row[col.key])}
                         >
                           {row[col.key]}
+                        </td>
+                      ) : col.type === "date" ? (
+                        <td key={`${col.key}-${row[col.key]}`}>
+                          {formatDate(row[col.key])}
                         </td>
                       ) : (
                         <td key={`${col.key}-${row[col.key]}`}>

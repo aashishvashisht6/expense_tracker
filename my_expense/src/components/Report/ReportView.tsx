@@ -4,6 +4,7 @@ type ReportParams = {
 };
 
 const ReportView = ({ cols, data }: ReportParams) => {
+  const formatDate = (date: Date) => new Intl.DateTimeFormat("en-GB").format(new Date(date)).replace(/\//g, "-");
   return (
     <div className="table-responsive mt-4 mb-3">
       <table className="table table-bordered">
@@ -18,6 +19,11 @@ const ReportView = ({ cols, data }: ReportParams) => {
           {data.map((row, index) => (
             <tr key={index} className="text-center">
               {cols.map((col, colIndex) => (
+                col.fieldtype === "Date" ? (
+                  <td key={colIndex}>
+                    {row[col.fieldname] ? formatDate(row[col.fieldname]) : ""}
+                  </td>
+                ) : (
                 <td key={colIndex}>
                   <div
                     dangerouslySetInnerHTML={{
@@ -25,7 +31,7 @@ const ReportView = ({ cols, data }: ReportParams) => {
                     }}
                   />
                 </td>
-              ))}
+              )))}
             </tr>
           ))}
         </tbody>

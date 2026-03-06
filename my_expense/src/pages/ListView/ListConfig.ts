@@ -12,7 +12,7 @@ export const listConfig = {
 
   expenses: {
     title: "Expenses",
-    endpoint: `/api/resource/ET%20Bank%20Transaction`,
+    endpoint: `/api/resource/ET%20Bank%20Transaction?order_by=transaction_date desc`,
     filters: JSON.stringify({ transaction_type: "Expense" }),
     columns: [
       { key: "name", label: "ID", type: "Link" },
@@ -25,7 +25,7 @@ export const listConfig = {
 
   income: {
     title: "Income",
-    endpoint: `/api/resource/ET%20Bank%20Transaction`,
+    endpoint: `/api/resource/ET%20Bank%20Transaction?order_by=transaction_date desc`,
     filters: JSON.stringify({ transaction_type: "Income" }),
     columns: [
       { key: "name", label: "ID", type: "Link" },
@@ -37,7 +37,7 @@ export const listConfig = {
   },
   bank_transfer: {
     title: "Bank Transfer",
-    endpoint: `/api/resource/ET%20Bank%20Transaction`,
+    endpoint: `/api/resource/ET%20Bank%20Transaction?order_by=transaction_date desc`,
     filters: JSON.stringify({ transaction_type: "Bank Transfer" }),
     columns: [
       { key: "name", label: "ID", type: "Link" },
