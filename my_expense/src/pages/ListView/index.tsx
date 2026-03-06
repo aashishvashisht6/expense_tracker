@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ListView = ({
   doctype,
 }: {
-  doctype: "bank_account" | "expenses" | "income";
+  doctype: "bank_account" | "expenses" | "income" | "bank_transfer";
 }) => {
   const [data, setData] = useState<any[]>([]);
   const [limitStart, setLimitStart] = useState<number>(0);
@@ -15,7 +15,7 @@ const ListView = ({
 
   const navigateToDetail = (name: string) => {
     navigate(`/${doctype}/${name}`);
-  }
+  };
 
   const getListData = () => {
     const url = `${listConfig[doctype].endpoint}`;
@@ -41,7 +41,12 @@ const ListView = ({
     <div className="container-fluid">
       <div className="d-flex flex-row justify-content-between mb-3">
         <h4>{listConfig[doctype].title}</h4>
-        <button className="btn btn-primary" onClick={() => navigateToDetail("new")}>Add New</button>
+        <button
+          className="btn btn-primary"
+          onClick={() => navigateToDetail("new")}
+        >
+          Add New
+        </button>
       </div>
 
       <div className="table table-responsive mt-4 mb-3">
@@ -55,24 +60,35 @@ const ListView = ({
           </thead>
 
           <tbody>
-            {data.length > 0 ? data.map((row: any) => (
-              <tr key={row.name} className="text-center">
-                {listConfig[doctype].columns.map((col) => (
+            {data.length > 0 ? (
+              data.map((row: any) => (
+                <tr key={row.name} className="text-center">
+                  {listConfig[doctype].columns.map((col) => (
                     <>
-                    {col.type === "Link"? (
-                        <td key={`${col.key}-${row[col.key]}`} className="text-decoration-underline" style={{cursor: "pointer"}} onClick={() => navigateToDetail(row[col.key])}>{row[col.key]}</td>
-                    ) : (
-                        <td key={`${col.key}-${row[col.key]}`}>{row[col.key]}</td>
-                    )}
+                      {col.type === "Link" ? (
+                        <td
+                          key={`${col.key}-${row[col.key]}`}
+                          className="text-decoration-underline"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => navigateToDetail(row[col.key])}
+                        >
+                          {row[col.key]}
+                        </td>
+                      ) : (
+                        <td key={`${col.key}-${row[col.key]}`}>
+                          {row[col.key]}
+                        </td>
+                      )}
                     </>
-                ))}
-              </tr>
-            )) : (
-                <tr className="text-center">
-                  <td colSpan={listConfig[doctype].columns.length}>
-                    No data available
-                  </td>
+                  ))}
                 </tr>
+              ))
+            ) : (
+              <tr className="text-center">
+                <td colSpan={listConfig[doctype].columns.length}>
+                  No data available
+                </td>
+              </tr>
             )}
           </tbody>
         </table>

@@ -41,7 +41,7 @@ const PrivateRoute = () => {
 
   return (
     <AuthContext.Provider value={user}>
-      {!loading && <Outlet/>}
+      {!loading && user.email ? <Outlet/> : null}
     </AuthContext.Provider>
   );
 };

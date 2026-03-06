@@ -46,4 +46,25 @@ export const formConfig: any = {
       { key: "cancelled", label: "Cancelled", type: "checkbox" },
     ],
   },
+  bank_transfer: {
+    title: "Bank Transfer",
+    endpoint: "/api/resource/ET%20Bank%20Transaction",
+    fields: [
+      { key: "name", label: "ID", type: "text", hidden: true },
+      { key: "bank_account", label: "From Bank Account", type: "link", reqd:true, options: "ET Bank Account"  },
+      { key: "to_bank_account", label: "To Bank Account", type: "link", reqd:true, options: "ET Bank Account"  },
+      { key: "transaction_date", label: "Transaction Date", type: "date", reqd:true  },
+      {
+        key: "transaction_type",
+        label: "Transaction Type",
+        type: "select",
+        options: ["Bank Transfer"],
+        reqd:true 
+      },
+      { key: "amount", label: "Amount", type: "number", reqd:true  },
+      { key: "remarks", label: "Remarks", type: "text", reqd:true  },
+      { key: "cancelled", label: "Cancelled", type: "checkbox" },
+    ],
+  },
+  
 };

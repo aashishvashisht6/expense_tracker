@@ -35,4 +35,17 @@ export const listConfig = {
       { key: "cancelled", label: "Cancelled", type: "checkbox" },
     ],
   },
+  bank_transfer: {
+    title: "Bank Transfer",
+    endpoint: `/api/resource/ET%20Bank%20Transaction`,
+    filters: JSON.stringify({ transaction_type: "Bank Transfer" }),
+    columns: [
+      { key: "name", label: "ID", type: "Link" },
+      { key: "bank_account", label: "From Bank Account", type: "text" },
+      { key: "to_bank_account", label: "To Bank Account", type: "text" },
+      { key: "transaction_date", label: "Transaction Date", type: "date" },
+      { key: "amount", label: "Amount", type: "number" },
+      { key: "cancelled", label: "Cancelled", type: "checkbox" },
+    ],
+  },
 };

@@ -5,6 +5,7 @@
  "engine": "InnoDB",
  "field_order": [
   "bank_account",
+  "to_bank_account",
   "transaction_date",
   "transaction_type",
   "amount",
@@ -27,7 +28,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Transaction Type",
-   "options": "Expense\nIncome",
+   "options": "Expense\nIncome\nBank Transfer",
    "reqd": 1
   },
   {
@@ -56,12 +57,19 @@
    "fieldtype": "Small Text",
    "label": "Remarks",
    "reqd": 1
+  },
+  {
+   "fieldname": "to_bank_account",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "To Bank Account",
+   "options": "ET Bank Account"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-13 21:40:53.520367",
+ "modified": "2026-03-06 19:38:26.498062",
  "modified_by": "Administrator",
  "module": "Expense Tracker",
  "name": "ET Bank Transaction",

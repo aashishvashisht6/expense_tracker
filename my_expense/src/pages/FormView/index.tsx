@@ -7,7 +7,7 @@ import DynamicField, {
 } from "../../components/common/ExpenseField";
 
 type FormViewParams = {
-  doctype: "bank_account" | "expenses" | "income";
+  doctype: "bank_account" | "expenses" | "income" | "bank_transfer";
   name: string;
 };
 
@@ -31,7 +31,7 @@ const FormView = () => {
         console.error("Error saving data:", resp.error);
       } else {
         if (name === "new") {
-          navigate(`/${doctype}/${resp.data.name}`);
+          navigate(`/${doctype}`);
         }
         setError("");
         setFormData(resp.data);

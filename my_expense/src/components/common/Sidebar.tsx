@@ -4,6 +4,7 @@ const sidebarItems = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Bank Account", path: "/bank-account" },
   { name: "Expenses", path: "/expenses" },
+  { name: "Bank Transfer", path: "/bank_transfer" },
   { name: "Income", path: "/income" },
   { name: "Reports", path: "/reports" },
 ];

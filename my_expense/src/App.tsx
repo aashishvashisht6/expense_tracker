@@ -21,6 +21,7 @@ function App() {
           <Route path="bank-account" element={<ListView doctype="bank_account"/>} />
           <Route path="expenses" element={<ListView doctype="expenses"/>} />
           <Route path="income" element={<ListView doctype="income"/>} />
+          <Route path="bank_transfer" element={<ListView doctype="bank_transfer"/>} />
           <Route path=":doctype/:name" element={<FormView />} />
           <Route path="reports" element={<Report/>} />
         </Route>
